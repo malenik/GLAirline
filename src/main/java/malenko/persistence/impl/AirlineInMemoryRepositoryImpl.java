@@ -1,13 +1,18 @@
-package malenko.persistance.impl;
+package malenko.persistence.impl;
 
 import malenko.model.Airline;
-import malenko.persistance.AirlineInMemoryRepository;
+import malenko.persistence.AirlineInMemoryRepository;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
 public class AirlineInMemoryRepositoryImpl extends AirlineInMemoryRepository {
+
+    public AirlineInMemoryRepositoryImpl() {
+        this(new HashMap<>());
+    }
 
     public AirlineInMemoryRepositoryImpl(Map<UUID, Airline> state) {
         super(state);

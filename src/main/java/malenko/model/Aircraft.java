@@ -1,5 +1,6 @@
 package malenko.model;
 
+import java.util.Objects;
 import java.util.UUID;
 
 public class Aircraft implements
@@ -52,13 +53,12 @@ public class Aircraft implements
             int fuelConsumption,
             UUID id
     ) {
-        if (model == null || id == null) {
-            return false;
-        } else if (capacity < 0 || carryingCapacity < 0|| range < 0 || fuelConsumption < 0) {
-            return false;
-        } else {
-            return true;
-        }
+        return model != null &&
+                id != null &&
+                capacity >= 0 &&
+                carryingCapacity >= 0 &&
+                range >= 0 &&
+                fuelConsumption >= 0;
     }
 
     public AircraftModel getModel() {
@@ -92,27 +92,19 @@ public class Aircraft implements
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
+        if (!(o instanceof Aircraft)) return false;
         Aircraft aircraft = (Aircraft) o;
-
-        if (capacity != aircraft.capacity) return false;
-        if (carryingCapacity != aircraft.carryingCapacity) return false;
-        if (range != aircraft.range) return false;
-        if (fuelConsumption != aircraft.fuelConsumption) return false;
-        if (model != aircraft.model) return false;
-        return id != null ? id.equals(aircraft.id) : aircraft.id == null;
+        return capacity == aircraft.capacity &&
+                carryingCapacity == aircraft.carryingCapacity &&
+                range == aircraft.range &&
+                fuelConsumption == aircraft.fuelConsumption &&
+                model == aircraft.model &&
+                Objects.equals(id, aircraft.id);
     }
 
     @Override
     public int hashCode() {
-        int result = model != null ? model.hashCode() : 0;
-        result = 31 * result + capacity;
-        result = 31 * result + carryingCapacity;
-        result = 31 * result + range;
-        result = 31 * result + fuelConsumption;
-        result = 31 * result + (id != null ? id.hashCode() : 0);
-        return result;
+        return Objects.hash(model, capacity, carryingCapacity, range, fuelConsumption, id);
     }
 
     @Override

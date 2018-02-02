@@ -1,6 +1,6 @@
 import malenko.controller.AirlineController;
 import malenko.model.Airline;
-import malenko.persistance.impl.AirlineInMemoryRepositoryImpl;
+import malenko.persistence.impl.AirlineInMemoryRepositoryImpl;
 import malenko.service.AirlineService;
 import malenko.service.impl.AirlineServiceImpl;
 
@@ -17,8 +17,7 @@ public class AirlineLauncher {
 
         // Dependency injection to simplify testing
         Scanner sc = new Scanner(System.in);
-        Map<UUID, Airline> initialState = new HashMap<>();
-        AirlineInMemoryRepositoryImpl repo = new AirlineInMemoryRepositoryImpl(initialState);
+        AirlineInMemoryRepositoryImpl repo = new AirlineInMemoryRepositoryImpl();
         AirlineService service = new AirlineServiceImpl(repo);
         AirlineController controller = new AirlineController(service, sc);
 

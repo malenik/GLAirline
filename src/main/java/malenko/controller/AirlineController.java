@@ -5,7 +5,6 @@ import malenko.model.AircraftModel;
 import malenko.model.Airline;
 import malenko.service.AirlineService;
 import malenko.service.impl.AircraftFactory;
-import malenko.service.impl.AirlineServiceImpl;
 import malenko.service.impl.AirlineFactory;
 
 import java.util.ArrayList;
@@ -53,7 +52,6 @@ public class AirlineController {
 
             if (!aircraftExists) {
                 say(String.format("Invalid aircraft name: '%s'", aircraftName));
-                return;
             } else {
                 AircraftModel model = AircraftModel.valueOf(aircraftName);
                 Aircraft aircraft = AircraftFactory.instance(model);
@@ -132,7 +130,6 @@ public class AirlineController {
 
         if (!maybeAirline.isPresent()) {
             say(String.format("Invalid airline name: '%s'", airlineName));
-            return;
         } else {
             Airline airline = maybeAirline.get();
             consumer.accept(airline);

@@ -1,4 +1,4 @@
-package malenko.persistance;
+package malenko.persistence;
 
 import malenko.model.Identifiable;
 
@@ -25,7 +25,7 @@ abstract public class CRUDRepositorySkeleton<ID, T extends Identifiable<ID>>
 
     @Override
     public boolean exists(ID id) {
-        return Optional.ofNullable(state.get(id)).isPresent();
+        return read(id).isPresent();
     }
 
     @Override
@@ -38,7 +38,7 @@ abstract public class CRUDRepositorySkeleton<ID, T extends Identifiable<ID>>
 
     @Override
     public Optional<T> update(ID id, T t) {
-        Optional<T> maybeUpdatedValue = Optional.ofNullable(state.get(id))
+        Optional<T> maybeUpdatedValue = read(id)
                 .map(value -> {
                     Map<ID, T> newState = new HashMap<>(state);
                     newState.put(id, t);
@@ -51,7 +51,7 @@ abstract public class CRUDRepositorySkeleton<ID, T extends Identifiable<ID>>
 
     @Override
     public Optional<T> delete(ID id) {
-        Optional<T> maybeDeletedValue = Optional.ofNullable(state.get(id))
+        Optional<T> maybeDeletedValue = read(id)
                 .map(value -> {
                     Map<ID, T> newState = new HashMap<>(state);
                     newState.remove(id);

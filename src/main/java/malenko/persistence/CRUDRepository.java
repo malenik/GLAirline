@@ -1,4 +1,4 @@
-package malenko.persistance;
+package malenko.persistence;
 
 import malenko.model.Identifiable;
 
@@ -15,6 +15,11 @@ public interface CRUDRepository<ID, T extends Identifiable<ID>> {
 
     T create(T t);
 
+    /**
+     * @param id identifier
+     * @param t object to update
+     * @return optional of previous value or empty if was not updated
+     */
     Optional<T> update(ID id, T t);
 
     Optional<T> delete(ID id);

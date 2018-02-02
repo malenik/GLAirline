@@ -1,7 +1,7 @@
 package malenko.service.impl;
 
 import malenko.model.Airline;
-import malenko.persistance.AirlineInMemoryRepository;
+import malenko.persistence.AirlineInMemoryRepository;
 import malenko.service.AirlineService;
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package malenko.persistance;
+package malenko.persistence;
 
 import malenko.model.Airline;
 
